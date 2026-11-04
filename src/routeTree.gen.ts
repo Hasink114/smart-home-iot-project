@@ -9,50 +9,204 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
+import { Route as AppRouteImport } from './routes/_app'
+import { Route as AppIndexRouteImport } from './routes/_app/index'
+import { Route as AppAnalyticsRouteImport } from './routes/_app/analytics'
+import { Route as AppDevicesRouteImport } from './routes/_app/devices'
+import { Route as AppRoomsRouteImport } from './routes/_app/rooms'
+import { Route as AppSchedulesRouteImport } from './routes/_app/schedules'
+import { Route as AppSettingsRouteImport } from './routes/_app/settings'
+import { Route as AppSubscriptionRouteImport } from './routes/_app/subscription'
 
-const IndexRoute = IndexRouteImport.update({
+const AppRoute = AppRouteImport.update({
+  id: '/_app',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppIndexRoute = AppIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AppRoute,
+} as any)
+const AppAnalyticsRoute = AppAnalyticsRouteImport.update({
+  id: '/analytics',
+  path: '/analytics',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppDevicesRoute = AppDevicesRouteImport.update({
+  id: '/devices',
+  path: '/devices',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppRoomsRoute = AppRoomsRouteImport.update({
+  id: '/rooms',
+  path: '/rooms',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppSchedulesRoute = AppSchedulesRouteImport.update({
+  id: '/schedules',
+  path: '/schedules',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppSettingsRoute = AppSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppSubscriptionRoute = AppSubscriptionRouteImport.update({
+  id: '/subscription',
+  path: '/subscription',
+  getParentRoute: () => AppRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
+  '/': typeof AppIndexRoute
+  '/analytics': typeof AppAnalyticsRoute
+  '/devices': typeof AppDevicesRoute
+  '/rooms': typeof AppRoomsRoute
+  '/schedules': typeof AppSchedulesRoute
+  '/settings': typeof AppSettingsRoute
+  '/subscription': typeof AppSubscriptionRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
+  '/analytics': typeof AppAnalyticsRoute
+  '/devices': typeof AppDevicesRoute
+  '/rooms': typeof AppRoomsRoute
+  '/schedules': typeof AppSchedulesRoute
+  '/settings': typeof AppSettingsRoute
+  '/subscription': typeof AppSubscriptionRoute
+  '/': typeof AppIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
+  '/_app': typeof AppRouteWithChildren
+  '/_app/analytics': typeof AppAnalyticsRoute
+  '/_app/devices': typeof AppDevicesRoute
+  '/_app/rooms': typeof AppRoomsRoute
+  '/_app/schedules': typeof AppSchedulesRoute
+  '/_app/settings': typeof AppSettingsRoute
+  '/_app/subscription': typeof AppSubscriptionRoute
+  '/_app/': typeof AppIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/analytics'
+    | '/devices'
+    | '/rooms'
+    | '/schedules'
+    | '/settings'
+    | '/subscription'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/analytics'
+    | '/devices'
+    | '/rooms'
+    | '/schedules'
+    | '/settings'
+    | '/subscription'
+    | '/'
+  id:
+    | '__root__'
+    | '/_app'
+    | '/_app/analytics'
+    | '/_app/devices'
+    | '/_app/rooms'
+    | '/_app/schedules'
+    | '/_app/settings'
+    | '/_app/subscription'
+    | '/_app/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
+  AppRoute: typeof AppRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
+    '/_app': {
+      id: '/_app'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AppRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_app/': {
+      id: '/_app/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof AppIndexRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/analytics': {
+      id: '/_app/analytics'
+      path: '/analytics'
+      fullPath: '/analytics'
+      preLoaderRoute: typeof AppAnalyticsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/devices': {
+      id: '/_app/devices'
+      path: '/devices'
+      fullPath: '/devices'
+      preLoaderRoute: typeof AppDevicesRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/rooms': {
+      id: '/_app/rooms'
+      path: '/rooms'
+      fullPath: '/rooms'
+      preLoaderRoute: typeof AppRoomsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/schedules': {
+      id: '/_app/schedules'
+      path: '/schedules'
+      fullPath: '/schedules'
+      preLoaderRoute: typeof AppSchedulesRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/settings': {
+      id: '/_app/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof AppSettingsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/subscription': {
+      id: '/_app/subscription'
+      path: '/subscription'
+      fullPath: '/subscription'
+      preLoaderRoute: typeof AppSubscriptionRouteImport
+      parentRoute: typeof AppRoute
     }
   }
 }
 
+interface AppRouteChildren {
+  AppAnalyticsRoute: typeof AppAnalyticsRoute
+  AppDevicesRoute: typeof AppDevicesRoute
+  AppRoomsRoute: typeof AppRoomsRoute
+  AppSchedulesRoute: typeof AppSchedulesRoute
+  AppSettingsRoute: typeof AppSettingsRoute
+  AppSubscriptionRoute: typeof AppSubscriptionRoute
+  AppIndexRoute: typeof AppIndexRoute
+}
+
+const AppRouteChildren: AppRouteChildren = {
+  AppAnalyticsRoute: AppAnalyticsRoute,
+  AppDevicesRoute: AppDevicesRoute,
+  AppRoomsRoute: AppRoomsRoute,
+  AppSchedulesRoute: AppSchedulesRoute,
+  AppSettingsRoute: AppSettingsRoute,
+  AppSubscriptionRoute: AppSubscriptionRoute,
+  AppIndexRoute: AppIndexRoute,
+}
+
+const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
+  AppRoute: AppRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
