@@ -34,7 +34,6 @@ function NavLinkItem({ item, onNavigate }) {
     <Link
       to={item.to}
       onClick={onNavigate}
-      activeProps={{ className: ACTIVE_ITEM_CLASSES }}
       activeOptions={{ exact: item.to === "/" }}
       className={({ isActive }) =>
         `${NAV_ITEM_CLASSES} ${isActive ? ACTIVE_ITEM_CLASSES : ""}`
