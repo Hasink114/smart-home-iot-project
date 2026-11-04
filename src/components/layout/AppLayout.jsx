@@ -35,9 +35,8 @@ function NavLinkItem({ item, onNavigate }) {
       to={item.to}
       onClick={onNavigate}
       activeOptions={{ exact: item.to === "/" }}
-      className={({ isActive }) =>
-        `${NAV_ITEM_CLASSES} ${isActive ? ACTIVE_ITEM_CLASSES : ""}`
-      }
+      className={NAV_ITEM_CLASSES}
+      activeProps={{ className: ACTIVE_ITEM_CLASSES }}
     >
       <Icon className="size-5 shrink-0" aria-hidden />
       <span>{item.label}</span>
